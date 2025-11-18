@@ -7,16 +7,20 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.projeto.max.generic.*;
-import com.projeto.max.domain.Collections;
 import com.projeto.max.domain.UserTypes;
 import com.projeto.max.domain.Users;
 import com.projeto.max.service.UsersService;
+import com.projeto.max.domain.Collections;
 import com.projeto.max.service.CollectionsService;
+import com.projeto.max.domain.Farms;
+import com.projeto.max.service.FarmsService;
 
 @RestController
 @RequestMapping("/api/collectors/")
@@ -24,33 +28,99 @@ public class CollectorsRestController extends UsersRestController {
     @Autowired
     UsersService usersService;
 	@Autowired
+    FarmsService farmsService;
+	@Autowired
     CollectionsService collectionsService;
 
 
     @GetMapping("/{id}/collections/history/")
 	public ResponseEntity<Map<String, Object>> collections(@PathVariable Long id, HttpServletRequest request) {
+        String pFarmid = request.getParameter("farmid");
+        String pPage = request.getParameter("page");
+        String pLimit = request.getParameter("limit");
+        String pStartDate = request.getParameter("startDate");
+        String pEndDate = request.getParameter("endDate");
+
+        Users collector = null;
+        Farms farm = null;
+        Integer page = 1;
+        Integer limit = 0;
         try {
-            Users collector = usersService.id(id);
+            collector = usersService.id(id);
 			if(collector == null) return ReturnJson.errorGeral(400, "collector nao encontrado.");
 
             UserTypes typeProducer = collector.getUser();
 			if(typeProducer.getIduserTypes() != Generic.coletor) return ReturnJson.errorGeral(400, "collector deve ter cargo de produtor.");
+
+            if(pPage != null) {
+                if(!Generic.validNumber(pPage)) return ReturnJson.errorGeral(400, "page deve ser um numero valido.");
+                page = Integer.parseInt(pPage);
+            }
+            if(pLimit != null){
+                limit = Integer.parseInt(pLimit);
+                if(!Generic.validNumber(pLimit)) return ReturnJson.errorGeral(400, "limit deve ser um numero valido.");
+            }
+            if(pFarmid != null) {
+                if(!Generic.validNumber(pFarmid)) return ReturnJson.errorGeral(400, "farmid deve ser um numero valido.");
+                farm = farmsService.id(Long.parseLong(pFarmid));
+			    if(farm == null) return ReturnJson.errorGeral(400, "farm não encontrada.");
+            }
+            if(pStartDate != null) {
+                if(!Generic.validLocalDate(pStartDate)) return ReturnJson.errorGeral(400, "startDate deve ter uma data valida.");
+            }
+            if(pEndDate != null) {
+                if(!Generic.validLocalDate(pEndDate)) return ReturnJson.errorGeral(400, "endDate deve ter uma data valida.");
+            }
         } catch (Exception e) {
             return ReturnJson.error(500, e, "Erro ao validar parametros.");
         }
 
         try {
             List<Collections> collections = collectionsService.encontrarPorCollector(collector);
-            List<Collections> filtredCollections;
+            List<Collections> filtredCollections = new ArrayList<>();
+            List<Collections> finalCollections = new ArrayList<>();
 
             for (int i = 0; i < collections.size(); i++) {
                 Collections col = collections.get(i);
-                filtredCollections.add(col);
+                Boolean filtred = false;
+
+                if(pFarmid != null){
+                    if(col.getFarm().getIdfarm() != farm.getIdfarm()) filtred = true;
+                }
+                if(pStartDate != null){
+                    LocalDateTime startDate = Generic.formatLocalDate(pStartDate).atStartOfDay();
+                    if(col.getCollectionDate().isBefore(startDate)) filtred = true;
+                }
+                if(pEndDate != null){
+                    LocalDateTime endDate = Generic.formatLocalDate(pEndDate).atTime(LocalTime.MAX);
+                    if(col.getCollectionDate().isAfter(endDate)) filtred = true;
+                }
+
+                if(!filtred) filtredCollections.add(col);
             }
 
-            return ReturnJson.success(202, filtredCollections, "Lista de Collections encontrada com sucesso.");
+            if(pLimit != null){
+                Integer curPage = 1;
+                Integer index = 0;
+                for (int i = 0; i < filtredCollections.size(); i++) {
+                    index++;
+                    Collections col = filtredCollections.get(i);
+                    if(page == curPage){
+                        finalCollections.add(col);
+                    }
+
+                    if(index == limit) {
+                        index = 0;
+                        curPage++;
+                    }
+                }
+            } else {
+                finalCollections = filtredCollections;
+            }
+
+            return ReturnJson.success(202, finalCollections, "Historico de collector encontrado com sucesso.");
         } catch (Exception e) {
-            return ReturnJson.error(500, e, "Erro ao validar parametros.");
+            return ReturnJson.error(500, e, "Erro ao encontrar historico de collector.");
         }
     }
 
