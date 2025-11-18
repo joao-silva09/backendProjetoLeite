@@ -1,0 +1,1719 @@
+[
+  {
+    "name": "USER_TYPES",
+    "columns": [
+      {
+        "name": "IDUSER_TYPES",
+        "type": "Long",
+        "pk": true,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "NAME",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "VARCHAR",
+        "len": 50
+      }
+    ]
+  },
+  {
+    "name": "ANIMALS",
+    "columns": [
+      {
+        "name": "IDANIMAL",
+        "type": "Long",
+        "pk": true,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "NAME",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "VARCHAR",
+        "len": 100
+      }
+    ]
+  },
+  {
+    "name": "DAIRYS",
+    "columns": [
+      {
+        "name": "IDDAIRY",
+        "type": "Long",
+        "pk": true,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "NAME",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "VARCHAR",
+        "len": 100
+      }
+    ]
+  },
+  {
+    "name": "USERS",
+    "columns": [
+      {
+        "name": "IDUSER",
+        "type": "Long",
+        "pk": true,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "NAME",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "VARCHAR",
+        "len": 150
+      },
+      {
+        "name": "DOCUMENT",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "VARCHAR",
+        "len": 20
+      },
+      {
+        "name": "EMAIL",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "VARCHAR",
+        "len": 150
+      },
+      {
+        "name": "PASSWORD_HASH",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "VARCHAR",
+        "len": 255
+      },
+      {
+        "name": "USER_TYPE_ID",
+        "type": "Long",
+        "pk": false,
+        "fk": {
+          "refTableName": "USER_TYPES",
+          "refTable": {
+            "name": "USER_TYPES",
+            "columns": [
+              {
+                "name": "IDUSER_TYPES",
+                "type": "Long",
+                "pk": true,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "NAME",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 50
+              }
+            ]
+          },
+          "refCampo": "IDUSER_TYPES",
+          "campo": {
+            "name": "IDUSER_TYPES",
+            "type": "Long",
+            "pk": true,
+            "fk": null,
+            "notNull": false,
+            "rawType": "BIGINT"
+          }
+        },
+        "notNull": true,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "ACTIVE",
+        "type": "Boolean",
+        "pk": false,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BOOLEAN"
+      }
+    ]
+  },
+  {
+    "name": "USER_DAIRY",
+    "columns": [
+      {
+        "name": "DAIRY_ID",
+        "type": "Long",
+        "pk": true,
+        "fk": {
+          "refTableName": "DAIRYS",
+          "refTable": {
+            "name": "DAIRYS",
+            "columns": [
+              {
+                "name": "IDDAIRY",
+                "type": "Long",
+                "pk": true,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "NAME",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 100
+              }
+            ]
+          },
+          "refCampo": "IDDAIRY",
+          "campo": {
+            "name": "IDDAIRY",
+            "type": "Long",
+            "pk": true,
+            "fk": null,
+            "notNull": false,
+            "rawType": "BIGINT"
+          }
+        },
+        "notNull": true,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "USER_ID",
+        "type": "Long",
+        "pk": true,
+        "fk": {
+          "refTableName": "USERS",
+          "refTable": {
+            "name": "USERS",
+            "columns": [
+              {
+                "name": "IDUSER",
+                "type": "Long",
+                "pk": true,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "NAME",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 150
+              },
+              {
+                "name": "DOCUMENT",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 20
+              },
+              {
+                "name": "EMAIL",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 150
+              },
+              {
+                "name": "PASSWORD_HASH",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 255
+              },
+              {
+                "name": "USER_TYPE_ID",
+                "type": "Long",
+                "pk": false,
+                "fk": {
+                  "refTableName": "USER_TYPES",
+                  "refTable": {
+                    "name": "USER_TYPES",
+                    "columns": [
+                      {
+                        "name": "IDUSER_TYPES",
+                        "type": "Long",
+                        "pk": true,
+                        "fk": null,
+                        "notNull": false,
+                        "rawType": "BIGINT"
+                      },
+                      {
+                        "name": "NAME",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 50
+                      }
+                    ]
+                  },
+                  "refCampo": "IDUSER_TYPES",
+                  "campo": {
+                    "name": "IDUSER_TYPES",
+                    "type": "Long",
+                    "pk": true,
+                    "fk": null,
+                    "notNull": false,
+                    "rawType": "BIGINT"
+                  }
+                },
+                "notNull": true,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "ACTIVE",
+                "type": "Boolean",
+                "pk": false,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BOOLEAN"
+              }
+            ]
+          },
+          "refCampo": "IDUSER",
+          "campo": {
+            "name": "IDUSER",
+            "type": "Long",
+            "pk": true,
+            "fk": null,
+            "notNull": false,
+            "rawType": "BIGINT"
+          }
+        },
+        "notNull": true,
+        "rawType": "BIGINT"
+      }
+    ]
+  },
+  {
+    "name": "PRODUCERS",
+    "columns": [
+      {
+        "name": "IDPRODUCER",
+        "type": "Long",
+        "pk": true,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "USER_ID",
+        "type": "Long",
+        "pk": false,
+        "fk": {
+          "refTableName": "USERS",
+          "refTable": {
+            "name": "USERS",
+            "columns": [
+              {
+                "name": "IDUSER",
+                "type": "Long",
+                "pk": true,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "NAME",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 150
+              },
+              {
+                "name": "DOCUMENT",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 20
+              },
+              {
+                "name": "EMAIL",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 150
+              },
+              {
+                "name": "PASSWORD_HASH",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 255
+              },
+              {
+                "name": "USER_TYPE_ID",
+                "type": "Long",
+                "pk": false,
+                "fk": {
+                  "refTableName": "USER_TYPES",
+                  "refTable": {
+                    "name": "USER_TYPES",
+                    "columns": [
+                      {
+                        "name": "IDUSER_TYPES",
+                        "type": "Long",
+                        "pk": true,
+                        "fk": null,
+                        "notNull": false,
+                        "rawType": "BIGINT"
+                      },
+                      {
+                        "name": "NAME",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 50
+                      }
+                    ]
+                  },
+                  "refCampo": "IDUSER_TYPES",
+                  "campo": {
+                    "name": "IDUSER_TYPES",
+                    "type": "Long",
+                    "pk": true,
+                    "fk": null,
+                    "notNull": false,
+                    "rawType": "BIGINT"
+                  }
+                },
+                "notNull": true,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "ACTIVE",
+                "type": "Boolean",
+                "pk": false,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BOOLEAN"
+              }
+            ]
+          },
+          "refCampo": "IDUSER",
+          "campo": {
+            "name": "IDUSER",
+            "type": "Long",
+            "pk": true,
+            "fk": null,
+            "notNull": false,
+            "rawType": "BIGINT"
+          }
+        },
+        "notNull": true,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "CNPJ",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "VARCHAR",
+        "len": 20
+      },
+      {
+        "name": "ACTIVE",
+        "type": "Boolean",
+        "pk": false,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BOOLEAN"
+      }
+    ]
+  },
+  {
+    "name": "COLLECTORS",
+    "columns": [
+      {
+        "name": "IDCOLLECTOR",
+        "type": "Long",
+        "pk": true,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "USER_ID",
+        "type": "Long",
+        "pk": false,
+        "fk": {
+          "refTableName": "USERS",
+          "refTable": {
+            "name": "USERS",
+            "columns": [
+              {
+                "name": "IDUSER",
+                "type": "Long",
+                "pk": true,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "NAME",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 150
+              },
+              {
+                "name": "DOCUMENT",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 20
+              },
+              {
+                "name": "EMAIL",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 150
+              },
+              {
+                "name": "PASSWORD_HASH",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 255
+              },
+              {
+                "name": "USER_TYPE_ID",
+                "type": "Long",
+                "pk": false,
+                "fk": {
+                  "refTableName": "USER_TYPES",
+                  "refTable": {
+                    "name": "USER_TYPES",
+                    "columns": [
+                      {
+                        "name": "IDUSER_TYPES",
+                        "type": "Long",
+                        "pk": true,
+                        "fk": null,
+                        "notNull": false,
+                        "rawType": "BIGINT"
+                      },
+                      {
+                        "name": "NAME",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 50
+                      }
+                    ]
+                  },
+                  "refCampo": "IDUSER_TYPES",
+                  "campo": {
+                    "name": "IDUSER_TYPES",
+                    "type": "Long",
+                    "pk": true,
+                    "fk": null,
+                    "notNull": false,
+                    "rawType": "BIGINT"
+                  }
+                },
+                "notNull": true,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "ACTIVE",
+                "type": "Boolean",
+                "pk": false,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BOOLEAN"
+              }
+            ]
+          },
+          "refCampo": "IDUSER",
+          "campo": {
+            "name": "IDUSER",
+            "type": "Long",
+            "pk": true,
+            "fk": null,
+            "notNull": false,
+            "rawType": "BIGINT"
+          }
+        },
+        "notNull": true,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "CPF",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "VARCHAR",
+        "len": 20
+      },
+      {
+        "name": "ACTIVE",
+        "type": "Boolean",
+        "pk": false,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BOOLEAN"
+      }
+    ]
+  },
+  {
+    "name": "FARMS",
+    "columns": [
+      {
+        "name": "IDFARM",
+        "type": "Long",
+        "pk": true,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "NAME",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "VARCHAR",
+        "len": 150
+      },
+      {
+        "name": "PRODUCER_ID",
+        "type": "Long",
+        "pk": false,
+        "fk": {
+          "refTableName": "PRODUCERS",
+          "refTable": {
+            "name": "PRODUCERS",
+            "columns": [
+              {
+                "name": "IDPRODUCER",
+                "type": "Long",
+                "pk": true,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "USER_ID",
+                "type": "Long",
+                "pk": false,
+                "fk": {
+                  "refTableName": "USERS",
+                  "refTable": {
+                    "name": "USERS",
+                    "columns": [
+                      {
+                        "name": "IDUSER",
+                        "type": "Long",
+                        "pk": true,
+                        "fk": null,
+                        "notNull": false,
+                        "rawType": "BIGINT"
+                      },
+                      {
+                        "name": "NAME",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 150
+                      },
+                      {
+                        "name": "DOCUMENT",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 20
+                      },
+                      {
+                        "name": "EMAIL",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 150
+                      },
+                      {
+                        "name": "PASSWORD_HASH",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 255
+                      },
+                      {
+                        "name": "USER_TYPE_ID",
+                        "type": "Long",
+                        "pk": false,
+                        "fk": {
+                          "refTableName": "USER_TYPES",
+                          "refTable": {
+                            "name": "USER_TYPES",
+                            "columns": [
+                              {
+                                "name": "IDUSER_TYPES",
+                                "type": "Long",
+                                "pk": true,
+                                "fk": null,
+                                "notNull": false,
+                                "rawType": "BIGINT"
+                              },
+                              {
+                                "name": "NAME",
+                                "type": "String",
+                                "pk": false,
+                                "fk": null,
+                                "notNull": true,
+                                "rawType": "VARCHAR",
+                                "len": 50
+                              }
+                            ]
+                          },
+                          "refCampo": "IDUSER_TYPES",
+                          "campo": {
+                            "name": "IDUSER_TYPES",
+                            "type": "Long",
+                            "pk": true,
+                            "fk": null,
+                            "notNull": false,
+                            "rawType": "BIGINT"
+                          }
+                        },
+                        "notNull": true,
+                        "rawType": "BIGINT"
+                      },
+                      {
+                        "name": "ACTIVE",
+                        "type": "Boolean",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": false,
+                        "rawType": "BOOLEAN"
+                      }
+                    ]
+                  },
+                  "refCampo": "IDUSER",
+                  "campo": {
+                    "name": "IDUSER",
+                    "type": "Long",
+                    "pk": true,
+                    "fk": null,
+                    "notNull": false,
+                    "rawType": "BIGINT"
+                  }
+                },
+                "notNull": true,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "CNPJ",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 20
+              },
+              {
+                "name": "ACTIVE",
+                "type": "Boolean",
+                "pk": false,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BOOLEAN"
+              }
+            ]
+          },
+          "refCampo": "IDPRODUCER",
+          "campo": {
+            "name": "IDPRODUCER",
+            "type": "Long",
+            "pk": true,
+            "fk": null,
+            "notNull": false,
+            "rawType": "BIGINT"
+          }
+        },
+        "notNull": true,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "ACTIVE",
+        "type": "Boolean",
+        "pk": false,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BOOLEAN"
+      }
+    ]
+  },
+  {
+    "name": "COLLECTIONS",
+    "columns": [
+      {
+        "name": "IDCOLLECTION",
+        "type": "Long",
+        "pk": true,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "ANIMAL_ID",
+        "type": "Long",
+        "pk": false,
+        "fk": {
+          "refTableName": "ANIMALS",
+          "refTable": {
+            "name": "ANIMALS",
+            "columns": [
+              {
+                "name": "IDANIMAL",
+                "type": "Long",
+                "pk": true,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "NAME",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 100
+              }
+            ]
+          },
+          "refCampo": "IDANIMAL",
+          "campo": {
+            "name": "IDANIMAL",
+            "type": "Long",
+            "pk": true,
+            "fk": null,
+            "notNull": false,
+            "rawType": "BIGINT"
+          }
+        },
+        "notNull": true,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "FARM_ID",
+        "type": "Long",
+        "pk": false,
+        "fk": {
+          "refTableName": "FARMS",
+          "refTable": {
+            "name": "FARMS",
+            "columns": [
+              {
+                "name": "IDFARM",
+                "type": "Long",
+                "pk": true,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "NAME",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 150
+              },
+              {
+                "name": "PRODUCER_ID",
+                "type": "Long",
+                "pk": false,
+                "fk": {
+                  "refTableName": "PRODUCERS",
+                  "refTable": {
+                    "name": "PRODUCERS",
+                    "columns": [
+                      {
+                        "name": "IDPRODUCER",
+                        "type": "Long",
+                        "pk": true,
+                        "fk": null,
+                        "notNull": false,
+                        "rawType": "BIGINT"
+                      },
+                      {
+                        "name": "USER_ID",
+                        "type": "Long",
+                        "pk": false,
+                        "fk": {
+                          "refTableName": "USERS",
+                          "refTable": {
+                            "name": "USERS",
+                            "columns": [
+                              {
+                                "name": "IDUSER",
+                                "type": "Long",
+                                "pk": true,
+                                "fk": null,
+                                "notNull": false,
+                                "rawType": "BIGINT"
+                              },
+                              {
+                                "name": "NAME",
+                                "type": "String",
+                                "pk": false,
+                                "fk": null,
+                                "notNull": true,
+                                "rawType": "VARCHAR",
+                                "len": 150
+                              },
+                              {
+                                "name": "DOCUMENT",
+                                "type": "String",
+                                "pk": false,
+                                "fk": null,
+                                "notNull": true,
+                                "rawType": "VARCHAR",
+                                "len": 20
+                              },
+                              {
+                                "name": "EMAIL",
+                                "type": "String",
+                                "pk": false,
+                                "fk": null,
+                                "notNull": true,
+                                "rawType": "VARCHAR",
+                                "len": 150
+                              },
+                              {
+                                "name": "PASSWORD_HASH",
+                                "type": "String",
+                                "pk": false,
+                                "fk": null,
+                                "notNull": true,
+                                "rawType": "VARCHAR",
+                                "len": 255
+                              },
+                              {
+                                "name": "USER_TYPE_ID",
+                                "type": "Long",
+                                "pk": false,
+                                "fk": {
+                                  "refTableName": "USER_TYPES",
+                                  "refTable": {
+                                    "name": "USER_TYPES",
+                                    "columns": [
+                                      {
+                                        "name": "IDUSER_TYPES",
+                                        "type": "Long",
+                                        "pk": true,
+                                        "fk": null,
+                                        "notNull": false,
+                                        "rawType": "BIGINT"
+                                      },
+                                      {
+                                        "name": "NAME",
+                                        "type": "String",
+                                        "pk": false,
+                                        "fk": null,
+                                        "notNull": true,
+                                        "rawType": "VARCHAR",
+                                        "len": 50
+                                      }
+                                    ]
+                                  },
+                                  "refCampo": "IDUSER_TYPES",
+                                  "campo": {
+                                    "name": "IDUSER_TYPES",
+                                    "type": "Long",
+                                    "pk": true,
+                                    "fk": null,
+                                    "notNull": false,
+                                    "rawType": "BIGINT"
+                                  }
+                                },
+                                "notNull": true,
+                                "rawType": "BIGINT"
+                              },
+                              {
+                                "name": "ACTIVE",
+                                "type": "Boolean",
+                                "pk": false,
+                                "fk": null,
+                                "notNull": false,
+                                "rawType": "BOOLEAN"
+                              }
+                            ]
+                          },
+                          "refCampo": "IDUSER",
+                          "campo": {
+                            "name": "IDUSER",
+                            "type": "Long",
+                            "pk": true,
+                            "fk": null,
+                            "notNull": false,
+                            "rawType": "BIGINT"
+                          }
+                        },
+                        "notNull": true,
+                        "rawType": "BIGINT"
+                      },
+                      {
+                        "name": "CNPJ",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 20
+                      },
+                      {
+                        "name": "ACTIVE",
+                        "type": "Boolean",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": false,
+                        "rawType": "BOOLEAN"
+                      }
+                    ]
+                  },
+                  "refCampo": "IDPRODUCER",
+                  "campo": {
+                    "name": "IDPRODUCER",
+                    "type": "Long",
+                    "pk": true,
+                    "fk": null,
+                    "notNull": false,
+                    "rawType": "BIGINT"
+                  }
+                },
+                "notNull": true,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "ACTIVE",
+                "type": "Boolean",
+                "pk": false,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BOOLEAN"
+              }
+            ]
+          },
+          "refCampo": "IDFARM",
+          "campo": {
+            "name": "IDFARM",
+            "type": "Long",
+            "pk": true,
+            "fk": null,
+            "notNull": false,
+            "rawType": "BIGINT"
+          }
+        },
+        "notNull": true,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "PRODUCER_ID",
+        "type": "Long",
+        "pk": false,
+        "fk": {
+          "refTableName": "PRODUCERS",
+          "refTable": {
+            "name": "PRODUCERS",
+            "columns": [
+              {
+                "name": "IDPRODUCER",
+                "type": "Long",
+                "pk": true,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "USER_ID",
+                "type": "Long",
+                "pk": false,
+                "fk": {
+                  "refTableName": "USERS",
+                  "refTable": {
+                    "name": "USERS",
+                    "columns": [
+                      {
+                        "name": "IDUSER",
+                        "type": "Long",
+                        "pk": true,
+                        "fk": null,
+                        "notNull": false,
+                        "rawType": "BIGINT"
+                      },
+                      {
+                        "name": "NAME",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 150
+                      },
+                      {
+                        "name": "DOCUMENT",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 20
+                      },
+                      {
+                        "name": "EMAIL",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 150
+                      },
+                      {
+                        "name": "PASSWORD_HASH",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 255
+                      },
+                      {
+                        "name": "USER_TYPE_ID",
+                        "type": "Long",
+                        "pk": false,
+                        "fk": {
+                          "refTableName": "USER_TYPES",
+                          "refTable": {
+                            "name": "USER_TYPES",
+                            "columns": [
+                              {
+                                "name": "IDUSER_TYPES",
+                                "type": "Long",
+                                "pk": true,
+                                "fk": null,
+                                "notNull": false,
+                                "rawType": "BIGINT"
+                              },
+                              {
+                                "name": "NAME",
+                                "type": "String",
+                                "pk": false,
+                                "fk": null,
+                                "notNull": true,
+                                "rawType": "VARCHAR",
+                                "len": 50
+                              }
+                            ]
+                          },
+                          "refCampo": "IDUSER_TYPES",
+                          "campo": {
+                            "name": "IDUSER_TYPES",
+                            "type": "Long",
+                            "pk": true,
+                            "fk": null,
+                            "notNull": false,
+                            "rawType": "BIGINT"
+                          }
+                        },
+                        "notNull": true,
+                        "rawType": "BIGINT"
+                      },
+                      {
+                        "name": "ACTIVE",
+                        "type": "Boolean",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": false,
+                        "rawType": "BOOLEAN"
+                      }
+                    ]
+                  },
+                  "refCampo": "IDUSER",
+                  "campo": {
+                    "name": "IDUSER",
+                    "type": "Long",
+                    "pk": true,
+                    "fk": null,
+                    "notNull": false,
+                    "rawType": "BIGINT"
+                  }
+                },
+                "notNull": true,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "CNPJ",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 20
+              },
+              {
+                "name": "ACTIVE",
+                "type": "Boolean",
+                "pk": false,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BOOLEAN"
+              }
+            ]
+          },
+          "refCampo": "IDPRODUCER",
+          "campo": {
+            "name": "IDPRODUCER",
+            "type": "Long",
+            "pk": true,
+            "fk": null,
+            "notNull": false,
+            "rawType": "BIGINT"
+          }
+        },
+        "notNull": true,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "COLLECTOR_ID",
+        "type": "Long",
+        "pk": false,
+        "fk": {
+          "refTableName": "COLLECTORS",
+          "refTable": {
+            "name": "COLLECTORS",
+            "columns": [
+              {
+                "name": "IDCOLLECTOR",
+                "type": "Long",
+                "pk": true,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "USER_ID",
+                "type": "Long",
+                "pk": false,
+                "fk": {
+                  "refTableName": "USERS",
+                  "refTable": {
+                    "name": "USERS",
+                    "columns": [
+                      {
+                        "name": "IDUSER",
+                        "type": "Long",
+                        "pk": true,
+                        "fk": null,
+                        "notNull": false,
+                        "rawType": "BIGINT"
+                      },
+                      {
+                        "name": "NAME",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 150
+                      },
+                      {
+                        "name": "DOCUMENT",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 20
+                      },
+                      {
+                        "name": "EMAIL",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 150
+                      },
+                      {
+                        "name": "PASSWORD_HASH",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 255
+                      },
+                      {
+                        "name": "USER_TYPE_ID",
+                        "type": "Long",
+                        "pk": false,
+                        "fk": {
+                          "refTableName": "USER_TYPES",
+                          "refTable": {
+                            "name": "USER_TYPES",
+                            "columns": [
+                              {
+                                "name": "IDUSER_TYPES",
+                                "type": "Long",
+                                "pk": true,
+                                "fk": null,
+                                "notNull": false,
+                                "rawType": "BIGINT"
+                              },
+                              {
+                                "name": "NAME",
+                                "type": "String",
+                                "pk": false,
+                                "fk": null,
+                                "notNull": true,
+                                "rawType": "VARCHAR",
+                                "len": 50
+                              }
+                            ]
+                          },
+                          "refCampo": "IDUSER_TYPES",
+                          "campo": {
+                            "name": "IDUSER_TYPES",
+                            "type": "Long",
+                            "pk": true,
+                            "fk": null,
+                            "notNull": false,
+                            "rawType": "BIGINT"
+                          }
+                        },
+                        "notNull": true,
+                        "rawType": "BIGINT"
+                      },
+                      {
+                        "name": "ACTIVE",
+                        "type": "Boolean",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": false,
+                        "rawType": "BOOLEAN"
+                      }
+                    ]
+                  },
+                  "refCampo": "IDUSER",
+                  "campo": {
+                    "name": "IDUSER",
+                    "type": "Long",
+                    "pk": true,
+                    "fk": null,
+                    "notNull": false,
+                    "rawType": "BIGINT"
+                  }
+                },
+                "notNull": true,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "CPF",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 20
+              },
+              {
+                "name": "ACTIVE",
+                "type": "Boolean",
+                "pk": false,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BOOLEAN"
+              }
+            ]
+          },
+          "refCampo": "IDCOLLECTOR",
+          "campo": {
+            "name": "IDCOLLECTOR",
+            "type": "Long",
+            "pk": true,
+            "fk": null,
+            "notNull": false,
+            "rawType": "BIGINT"
+          }
+        },
+        "notNull": true,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "QUANTITY",
+        "type": "Float",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "FLOAT"
+      },
+      {
+        "name": "TEMPERATURE",
+        "type": "Float",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "FLOAT"
+      },
+      {
+        "name": "ACIDITY",
+        "type": "Float",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "FLOAT"
+      },
+      {
+        "name": "PRODUCER_PRESENT",
+        "type": "Boolean",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "BOOLEAN"
+      },
+      {
+        "name": "OBSERVATIONS",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": false,
+        "rawType": "TEXT"
+      },
+      {
+        "name": "COLLECTION_DATE",
+        "type": "LocalDateTime",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "TIMESTAMP"
+      },
+      {
+        "name": "SYNCED",
+        "type": "Boolean",
+        "pk": false,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BOOLEAN"
+      }
+    ]
+  },
+  {
+    "name": "LOGS_COLLECTION",
+    "columns": [
+      {
+        "name": "IDLOG_COLLECTION",
+        "type": "Long",
+        "pk": true,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "NAME",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "VARCHAR",
+        "len": 100
+      },
+      {
+        "name": "DESCRIPTION",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "VARCHAR",
+        "len": 600
+      },
+      {
+        "name": "USER_ID",
+        "type": "Long",
+        "pk": false,
+        "fk": {
+          "refTableName": "USERS",
+          "refTable": {
+            "name": "USERS",
+            "columns": [
+              {
+                "name": "IDUSER",
+                "type": "Long",
+                "pk": true,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "NAME",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 150
+              },
+              {
+                "name": "DOCUMENT",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 20
+              },
+              {
+                "name": "EMAIL",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 150
+              },
+              {
+                "name": "PASSWORD_HASH",
+                "type": "String",
+                "pk": false,
+                "fk": null,
+                "notNull": true,
+                "rawType": "VARCHAR",
+                "len": 255
+              },
+              {
+                "name": "USER_TYPE_ID",
+                "type": "Long",
+                "pk": false,
+                "fk": {
+                  "refTableName": "USER_TYPES",
+                  "refTable": {
+                    "name": "USER_TYPES",
+                    "columns": [
+                      {
+                        "name": "IDUSER_TYPES",
+                        "type": "Long",
+                        "pk": true,
+                        "fk": null,
+                        "notNull": false,
+                        "rawType": "BIGINT"
+                      },
+                      {
+                        "name": "NAME",
+                        "type": "String",
+                        "pk": false,
+                        "fk": null,
+                        "notNull": true,
+                        "rawType": "VARCHAR",
+                        "len": 50
+                      }
+                    ]
+                  },
+                  "refCampo": "IDUSER_TYPES",
+                  "campo": {
+                    "name": "IDUSER_TYPES",
+                    "type": "Long",
+                    "pk": true,
+                    "fk": null,
+                    "notNull": false,
+                    "rawType": "BIGINT"
+                  }
+                },
+                "notNull": true,
+                "rawType": "BIGINT"
+              },
+              {
+                "name": "ACTIVE",
+                "type": "Boolean",
+                "pk": false,
+                "fk": null,
+                "notNull": false,
+                "rawType": "BOOLEAN"
+              }
+            ]
+          },
+          "refCampo": "IDUSER",
+          "campo": {
+            "name": "IDUSER",
+            "type": "Long",
+            "pk": true,
+            "fk": null,
+            "notNull": false,
+            "rawType": "BIGINT"
+          }
+        },
+        "notNull": true,
+        "rawType": "BIGINT"
+      }
+    ]
+  },
+  {
+    "name": "QUALITY_INDICATORS",
+    "columns": [
+      {
+        "name": "IDQUALITY_INDICATOR",
+        "type": "Long",
+        "pk": true,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "COLLECTION_ID",
+        "type": "Long",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "ANTIBIOTIC",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": false,
+        "rawType": "VARCHAR",
+        "len": 50
+      },
+      {
+        "name": "FAT",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": false,
+        "rawType": "VARCHAR",
+        "len": 20
+      },
+      {
+        "name": "APPROVED",
+        "type": "Boolean",
+        "pk": false,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BOOLEAN"
+      },
+      {
+        "name": "QUALITY",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": false,
+        "rawType": "VARCHAR",
+        "len": 20
+      }
+    ]
+  },
+  {
+    "name": "QUALITY_INDICATOR_EXTRA",
+    "columns": [
+      {
+        "name": "IDQUALITY_INDICATOR_EXTRA",
+        "type": "Long",
+        "pk": true,
+        "fk": null,
+        "notNull": false,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "INDICATOR_ID",
+        "type": "Long",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "BIGINT"
+      },
+      {
+        "name": "KEY",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": true,
+        "rawType": "VARCHAR",
+        "len": 100
+      },
+      {
+        "name": "VALUE",
+        "type": "String",
+        "pk": false,
+        "fk": null,
+        "notNull": false,
+        "rawType": "VARCHAR",
+        "len": 100
+      }
+    ]
+  }
+]
