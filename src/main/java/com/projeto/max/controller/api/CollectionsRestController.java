@@ -18,6 +18,8 @@ import com.projeto.max.service.FarmsService;
 import com.projeto.max.domain.Users;
 import com.projeto.max.service.UsersService;
 import com.projeto.max.domain.UserTypes;
+import com.projeto.max.domain.LogsCollection;
+import com.projeto.max.service.LogsCollectionService;
 import java.time.LocalDateTime;
 
 @RestController
@@ -31,6 +33,8 @@ public class CollectionsRestController {
 	FarmsService farmsService;
 	@Autowired
 	UsersService usersService;
+	@Autowired
+	LogsCollectionService logsCollectionService;
 
 
 	// ---------------------------- FUNÇÕES INICIAIS ----------------------------
@@ -64,7 +68,8 @@ public class CollectionsRestController {
 	public ResponseEntity<Map<String, Object>> salvarCollections(HttpServletRequest request) {
                         
         String pIdcollection = request.getParameter("idcollection");
-		String pAnimalId = "1";
+		String pAnimalId = request.getParameter("animalid");
+		if(pAnimalId == null || pAnimalId.isEmpty()) pAnimalId = "1"; // Default: vaca
 		String pFarmId = request.getParameter("farmid");
 		String pProducerId = request.getParameter("producerid");
 		String pCollectorId = request.getParameter("collectorid");
@@ -130,14 +135,58 @@ public class CollectionsRestController {
                 return ReturnJson.success(202, curCollections, "Collections salva com sucesso.");
             }
 
+            // Atualizando Collections existente
             Long idcollection = Long.parseLong(pIdcollection);
-            curCollections = new Collections(animal, farm, producer, collector, quantity, temperature, acidity, producerPresent, observations, collectionDate);
-            if(collectionsService.id(idcollection) == null){
+            Collections existingCollection = collectionsService.id(idcollection);
+            if(existingCollection == null){
                 return ReturnJson.errorGeral(400, "Erro ao encontrar 'Collections' para atualizar.");
             }
+
+            // Gerar descrição das alterações para o log
+            StringBuilder logDescription = new StringBuilder();
+            logDescription.append("Edição #").append(existingCollection.getEditCount() + 1).append(" - Alterações: ");
+            
+            if (!existingCollection.getQuantity().equals(quantity)) {
+                logDescription.append("Quantidade: ").append(existingCollection.getQuantity()).append(" -> ").append(quantity).append("; ");
+            }
+            if (!existingCollection.getTemperature().equals(temperature)) {
+                logDescription.append("Temperatura: ").append(existingCollection.getTemperature()).append(" -> ").append(temperature).append("; ");
+            }
+            if (!existingCollection.getAcidity().equals(acidity)) {
+                logDescription.append("Acidez: ").append(existingCollection.getAcidity()).append(" -> ").append(acidity).append("; ");
+            }
+            if (!existingCollection.getProducerPresent().equals(producerPresent)) {
+                logDescription.append("Produtor presente: ").append(existingCollection.getProducerPresent()).append(" -> ").append(producerPresent).append("; ");
+            }
+            if (!existingCollection.getAnimal().getIdanimal().equals(animal.getIdanimal())) {
+                logDescription.append("Animal: ").append(existingCollection.getAnimal().getName()).append(" -> ").append(animal.getName()).append("; ");
+            }
+            if (!existingCollection.getFarm().getIdfarm().equals(farm.getIdfarm())) {
+                logDescription.append("Fazenda: ").append(existingCollection.getFarm().getName()).append(" -> ").append(farm.getName()).append("; ");
+            }
+            String existingObs = existingCollection.getObservations() != null ? existingCollection.getObservations() : "";
+            if (!existingObs.equals(observations)) {
+                logDescription.append("Observações alteradas; ");
+            }
+
+            curCollections = new Collections(animal, farm, producer, collector, quantity, temperature, acidity, producerPresent, observations, collectionDate);
             curCollections.setIdcollection(idcollection);
+            curCollections.setDataCadastro(existingCollection.getDataCadastro());
+            curCollections.setEdited(true);
+            curCollections.setEditCount(existingCollection.getEditCount() + 1);
+            
             collectionsService.salvar(curCollections);
-            return ReturnJson.success(202, curCollections, "Collections atualizada com sucesso.");
+
+            // Registrar log da edição
+            LogsCollection log = new LogsCollection(
+                curCollections,
+                "EDIÇÃO DE COLETA",
+                logDescription.toString(),
+                collector // Quem fez a edição
+            );
+            logsCollectionService.salvar(log);
+
+            return ReturnJson.success(202, curCollections, "Collections atualizada com sucesso. Log registrado.");
         } catch (Exception e) {
             return ReturnJson.error(400, e, "Erro ao atualizar Collections.");
         }

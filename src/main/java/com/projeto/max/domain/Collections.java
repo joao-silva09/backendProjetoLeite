@@ -42,6 +42,12 @@ public class Collections {
 	@Column(nullable = true)
 	private String observations;
 
+	@Column(nullable = false, columnDefinition = "boolean default false")
+	private Boolean edited = false;
+
+	@Column(nullable = false, columnDefinition = "integer default 0")
+	private Integer editCount = 0;
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	@Column(nullable = false)
 	private LocalDateTime collectionDate;
@@ -113,5 +119,11 @@ public class Collections {
 
 	public LocalDateTime getDataAtualizacao() { return dataAtualizacao; }
 	public void setDataAtualizacao(LocalDateTime dataAtualizacao) { this.dataAtualizacao = dataAtualizacao; }
+
+	public Boolean getEdited() { return edited; }
+	public void setEdited(Boolean edited) { this.edited = edited; }
+
+	public Integer getEditCount() { return editCount; }
+	public void setEditCount(Integer editCount) { this.editCount = editCount; }
 
 }

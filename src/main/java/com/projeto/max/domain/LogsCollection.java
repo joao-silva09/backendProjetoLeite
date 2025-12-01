@@ -11,6 +11,10 @@ public class LogsCollection {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idlogCollection;
 
+	@ManyToOne
+	@JoinColumn(referencedColumnName = "idcollection", nullable = true)
+	private Collections collection;
+
 	@Column(nullable = false, length = 100)
 	private String name;
 
@@ -33,7 +37,20 @@ public class LogsCollection {
 		this.dataCadastro = LocalDateTime.now();
 		this.dataAtualizacao = LocalDateTime.now();
     }
+
+    // Construtor sem collection (para logs genéricos)
     public LogsCollection(String name, String description, Users user) {
+		this.name = name;
+		this.description = description;
+		this.user = user; // fk
+    
+		this.dataCadastro = LocalDateTime.now();
+		this.dataAtualizacao = LocalDateTime.now();
+    }
+
+    // Construtor com collection (para logs de edição de coleta)
+    public LogsCollection(Collections collection, String name, String description, Users user) {
+		this.collection = collection; // fk
 		this.name = name;
 		this.description = description;
 		this.user = user; // fk
@@ -45,6 +62,9 @@ public class LogsCollection {
 
 	public Long getIdlogCollection() { return idlogCollection; }
 	public void setIdlogCollection(Long idlogCollection) { this.idlogCollection = idlogCollection; }
+
+	public Collections getCollection() { return collection; }
+	public void setCollection(Collections collection) { this.collection = collection; }
 
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
